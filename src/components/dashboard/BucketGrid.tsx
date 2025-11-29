@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase, getUserRole, type UserRole, type PermissionLevel } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -54,6 +55,7 @@ const permissionColors: Record<string, string> = {
 };
 
 const BucketGrid = ({ userId, searchQuery }: BucketGridProps) => {
+  const navigate = useNavigate();
   const [buckets, setBuckets] = useState<Bucket[]>([]);
   const [permissions, setPermissions] = useState<Record<string, PermissionLevel>>({});
   const [loading, setLoading] = useState(true);
@@ -140,6 +142,7 @@ const BucketGrid = ({ userId, searchQuery }: BucketGridProps) => {
           <Card 
             key={bucket.id} 
             className="hover:shadow-lg transition-shadow cursor-pointer border-l-4 border-l-primary"
+            onClick={() => navigate(`/bucket/${bucket.name}`)}
           >
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
