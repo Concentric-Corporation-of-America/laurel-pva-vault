@@ -58,7 +58,7 @@ describe('Auth Page', () => {
     it('calls signInWithPassword with correct credentials', async () => {
       const user = userEvent.setup()
       const mockSignIn = vi.mocked(supabase.auth.signInWithPassword)
-      mockSignIn.mockResolvedValueOnce({ data: { user: null, session: null }, error: null })
+      mockSignIn.mockResolvedValueOnce({ data: { user: null as any, session: null }, error: null })
 
       render(<Auth />)
 
@@ -141,8 +141,8 @@ describe('Auth Page', () => {
       const mockSignIn = vi.mocked(supabase.auth.signInWithPassword)
       mockSignIn.mockResolvedValueOnce({
         data: { user: null, session: null },
-        error: { message: 'Invalid credentials', name: 'AuthError', status: 401 }
-      })
+        error: { message: 'Invalid credentials', name: 'AuthError', status: 401, code: 'invalid_credentials', __isAuthError: true }
+      } as any)
 
       render(<Auth />)
 

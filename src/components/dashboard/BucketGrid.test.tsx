@@ -56,7 +56,7 @@ describe('BucketGrid', () => {
     vi.clearAllMocks()
   })
 
-  const setupMocks = (role = 'pva_admin', buckets = mockBuckets, permissions = mockPermissions) => {
+  const setupMocks = (role: 'public' | 'pva_admin' | 'deputy_pva' | 'senior_appraiser' | 'appraiser' | 'clerical_staff' | 'it_staff' | 'board_member' | 'taxpayer' | null = 'pva_admin', buckets = mockBuckets, permissions = mockPermissions) => {
     vi.mocked(getUserRole).mockResolvedValue({ data: role, error: null })
 
     const mockFrom = vi.mocked(supabase.from)
